@@ -6,7 +6,7 @@ const useGetPeopleWithPagination = () => {
   const [people, setPeople] = useState([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(0)
   const [hasNextPage, setHasNextPage] = useState(true)
   const [hasPreviousPage, setHasPreviousPage] = useState(false)
 
@@ -22,8 +22,8 @@ const useGetPeopleWithPagination = () => {
         data
       } } = await getCharacter(currentPage)
       console.tron.log(data)
-      setHasNextPage(!!data?.next)
-      setHasPreviousPage(!!data?.previous)
+      setHasNextPage(data?.total - data?.offset > 0)
+      setHasPreviousPage(data?.offset > 0)
 
       setPeople(data?.results)
       return data

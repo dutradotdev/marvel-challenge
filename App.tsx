@@ -2,15 +2,23 @@
 import React from 'react'
 import { LogBox } from 'react-native'
 import 'react-native-gesture-handler'
-import Router from './src/router'
+import { Provider } from 'react-redux'
+import store from '@marvel/redux/store'
+import Router from '@marvel/router'
 
 if (__DEV__) {
-  import('./src/config/ReactotronConfig').then(() => console.log('Reactotron Configured'))
+  import('@marvel/config/ReactotronConfig').then(() => console.log('Reactotron Configured'))
 }
 
 // ignore warnings from react-native-avataaars
 LogBox.ignoreAllLogs()
 
-const App = () => <Router />
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Router />
+    </Provider>
+  )
+}
 
 export default App

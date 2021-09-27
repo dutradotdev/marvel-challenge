@@ -4,7 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { Home, CharacterDetail } from '@marvel/screens'
 
-const Stack = createStackNavigator()
+export type RootStackParamList = {
+  Home: undefined;
+  CharacterDetail: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>()
 
 function Router() {
   return (
