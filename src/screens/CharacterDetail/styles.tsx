@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     width: '100%',
     backgroundColor: '#65C9FF',
-    flex: 1,
+    flex: 2,
     padding: 20,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
@@ -35,15 +35,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: 'white',
   },
-  image: {
-    width: 200,
-    height: 200,
-    position: 'absolute',
-    bottom: -5,
-    right: -50,
-    transform: [{ rotate: '-30deg' }],
-  },
   footerSafeArea: { backgroundColor: '#65C9FF' },
+  heroImage: { width: 200, height: 200, borderRadius: 25, marginVertical: 20 },
 })
 
 export default styles

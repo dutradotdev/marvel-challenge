@@ -9,25 +9,32 @@ import {
   Image,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
+import { useDispatch } from 'react-redux'
 
-import { logo } from '@marvel/assets'
 import { Button, Error } from '@marvel/components'
 import { useGetPeopleWithPagination } from '@marvel/hooks'
 
+import { setSelectedHero } from '@marvel/redux/CharacterDetail'
+
 import styles from './styles'
+import { toHttps } from '@marvel/utils'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '@marvel/router/router'
 
 type ItemProps = {
-  item: {
-    name: string,
-    thumbnail: {
-      path: string,
-      extension: string
-    }
+  name?: string,
+  description?: string,
+  thumbnail?: {
+    path?: string,
+    extension?: string
   }
 }
 
+type CharacterDetailScreenProp = StackNavigationProp<RootStackParamList, 'CharacterDetail'>;
+
 const Home = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<CharacterDetailScreenProp>()
+  const dispatch = useDispatch()
   const [
     { people: peopleData, loading: peopleLoading, error: peopleError },
     getPeople,
@@ -38,10 +45,16 @@ const Home = () => {
     currentPage,
   ] = useGetPeopleWithPagination()
 
-  const handleOnPress = (item) => {
-    navigation.navigate('CharacterDetail', {
-      item,
-    })
+  const handleOnPress = (item: ItemProps) => {
+
+    const { name, description, thumbnail } = item
+    dispatch(setSelectedHero({
+      name,
+      description,
+      path: thumbnail?.path,
+      extension: thumbnail?.extension
+    }))
+    navigation.navigate('CharacterDetail')
   }
 
   const ListItem = ({ item }: ItemProps) => {
@@ -51,7 +64,7 @@ const Home = () => {
       onPress={() => handleOnPress(item)}
       style={styles.cardContainer}>
       <View style={styles.avatarContainer}>
-        <Image style={styles.logo} resizeMode='contain' source={{ uri: `${item?.thumbnail?.path}.${item?.thumbnail?.extension}`.replace('http', 'https')}} />
+        <Image style={styles.logo} resizeMode='contain' source={{ uri: toHttps(`${item?.thumbnail?.path}.${item?.thumbnail?.extension}`)}} />
       </View>
       <View style={styles.descriptionContainer}>
         {item?.name && <Text style={styles.title}>Name: {item?.name}</Text>}
@@ -73,14 +86,14 @@ const Home = () => {
             />
             <Button disabled={!hasNextPage} onPress={nextPage} title='Next' />
           </View>
-          <Text style={[styles.title, styles.withMargin]}>Page: {currentPage}</Text>
+          <Text style={[styles.title, styles.withMargin]}>Página: {Number(currentPage) + 1}</Text>
         </View>
       )}
     </>
   )
 
-  const renderItem = ({ item }: ItemProps) => <ListItem item={item} />
-  const keyExtractor = ({ item }: ItemProps) => item?.name
+  const renderItem = ({ item }) => <ListItem item={item} />
+  const keyExtractor = (item: ItemProps) => item?.name
 
   const CharacterList = () => (
     <FlatList
