@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
 import { SafeAreaView, View, Text, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
-
-import { darth } from '@marvel/assets'
+import { useSelector } from 'react-redux'
 import styles from './styles'
 
 const CharacterDetail = () => {
   const navigation = useNavigation()
+  const { selectedHero } = useSelector(state => state)
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'MOCKADO'
+      title: selectedHero?.name
     })
   }, [])
 
@@ -18,15 +18,10 @@ const CharacterDetail = () => {
     <>
       <SafeAreaView style={styles.backgroundStyle}>
         <View style={styles.container}>
+        <Image style={styles.heroImage} resizeMode='contain' source={{ uri: selectedHero?.url }} />
           <View style={styles.footerContainer}>
-            <Text style={styles.title}>Character description:</Text>
-            <Text style={styles.item}>Height: {'DADOS MOCKADOS'}</Text>
-            <Text style={styles.item}>Mass: {'DADOS MOCKADOS'}</Text>
-            <Text style={styles.item}>Birth Year: {'DADOS MOCKADOS'}</Text>
-            <Text style={styles.item}>Gender: {'DADOS MOCKADOS'}</Text>
-            <Text style={styles.item}>Hair color: {'DADOS MOCKADOS'}</Text>
-            <Text style={styles.item}>Skin color: {'DADOS MOCKADOS'}</Text>
-            <Image style={styles.image} source={darth} />
+            <Text style={styles.item}>Nome: {selectedHero?.name}</Text>
+            <Text style={styles.item}>Descrição: {selectedHero?.description || 'Herói sem descrição'}</Text>
           </View>
         </View>
       </SafeAreaView>
