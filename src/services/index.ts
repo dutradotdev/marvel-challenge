@@ -1,7 +1,3 @@
-import getCharacter from "./character";
-import getWorld  from "./world";
+import getCharacter from './character'
 
-export {
-  getCharacter,
-  getWorld
-}
+export { getCharacter }
