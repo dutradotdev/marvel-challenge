@@ -24,12 +24,14 @@ The goal of this challenge is create a React Native app that has the following f
 
 Plus:
 
-- If API endpoint returns error for some reason, this app show a button that allow user to refetch the heroes.
-- Paginating character list.
-- Reactotron to debug.
-- Typescript
-- Use react-native-dotenv to protect sensive information (API URL and tokens)
-- Use axios interceptor to pass tokens over the URL
+- If API endpoint returns error for some reason, this app show a button that allow user to refetch the heroes;
+- Paginating character list;
+- Reactotron to debug;
+- Typescript;
+- Use react-native-dotenv to protect sensive information (API URL and tokens);
+- Use axios interceptor to pass tokens over the URL;
+- Loading icon;
+- Image loading indicator for better UX;
 
 ## Code quality:
 
