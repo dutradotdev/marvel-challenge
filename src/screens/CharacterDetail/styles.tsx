@@ -1,9 +1,10 @@
+import { colors, sizes } from '@marvel/styles'
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   backgroundStyle: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   container: {
     flex: 1,
@@ -17,9 +18,9 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     width: '100%',
-    backgroundColor: '#65C9FF',
+    backgroundColor: colors.blue.primary,
     flex: 2,
-    padding: 20,
+    padding: 40,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
   },
@@ -27,16 +28,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22,
     marginBottom: 10,
-    color: 'white',
+    color: colors.white,
   },
   item: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: sizes.text.large,
     marginBottom: 10,
-    color: 'white',
+    color: colors.white,
   },
-  footerSafeArea: { backgroundColor: '#65C9FF' },
+  footerSafeArea: { backgroundColor: colors.blue.primary },
   heroImage: { width: 200, height: 200, borderRadius: 25, marginVertical: 20 },
+  favoriteHeroButton: { position: 'absolute', top: 10, right: 20 },
 })
 
 export default styles
