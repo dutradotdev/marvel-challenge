@@ -1,12 +1,13 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-import { Button } from '@marvel/components'
-import styles from './styles'
+import { View } from 'react-native'
+import { Button, Text } from '@marvel/components'
 
 const Error = ({ refetch = () => {} }) => {
   return (
     <View>
-      <Text style={styles.title}>An error has occurred :(</Text>
+      <Text weight='bold' size='large'>
+        An error has occurred :(
+      </Text>
       <Button onPress={refetch} title='Try again' />
     </View>
   )

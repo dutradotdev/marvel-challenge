@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { sizes as textSizes } from '@marvel/styles';
+import { StyleSheet } from 'react-native'
+import { sizes as textSizes } from '@marvel/styles'
 
 const sizes = StyleSheet.create({
   small: {
@@ -11,7 +11,7 @@ const sizes = StyleSheet.create({
   large: {
     fontSize: textSizes.text.large,
   },
-});
+})
 
 const weights = StyleSheet.create({
   normal: {
@@ -20,6 +20,6 @@ const weights = StyleSheet.create({
   bold: {
     fontWeight: 'bold',
   },
-});
+})
 
-export { sizes, weights };
+export { sizes, weights }

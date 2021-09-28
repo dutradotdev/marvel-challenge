@@ -1,3 +1,4 @@
+import { colors } from '@marvel/styles'
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -7,18 +8,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FBE91A',
+    backgroundColor: colors.yellow.primary,
     borderRadius: 10,
     alignSelf: 'center',
     marginTop: 10,
   },
   disabled: {
-    backgroundColor: '#A8C2C2',
-    color: 'white',
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 16,
+    backgroundColor: colors.gray.secondary,
+    color: colors.white,
   },
 })
 

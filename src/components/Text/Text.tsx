@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { ReactNode } from 'react';
-import { StyleProp, TextStyle } from 'react-native';
-import { Text as RNText } from 'react-native';
-import { colors } from '@marvel/styles';
+import * as React from 'react'
+import { ReactNode } from 'react'
+import { StyleProp, TextStyle } from 'react-native'
+import { Text as RNText } from 'react-native'
+import { colors } from '@marvel/styles'
 
-import { sizes, weights } from './styles';
+import { sizes, weights } from './styles'
 
 type TextProps = {
-  size?: 'small' | 'medium' | 'large';
-  color?: string;
-  weight?: 'bold' | 'normal';
-  children?: ReactNode;
-  customStyle?: StyleProp<TextStyle>;
-};
+  size?: 'small' | 'medium' | 'large'
+  color?: string
+  weight?: 'bold' | 'normal'
+  children?: ReactNode
+  customStyle?: StyleProp<TextStyle>
+}
 
 const Text: React.FC<TextProps> = ({ size, color, weight, customStyle, children }: TextProps) => {
   const style = {
@@ -20,10 +20,10 @@ const Text: React.FC<TextProps> = ({ size, color, weight, customStyle, children 
     ...weights[weight || 'normal'],
     ...(customStyle as Record<string, unknown>),
     color,
-  };
+  }
 
-  return <RNText style={style}>{children}</RNText>;
-};
+  return <RNText style={style}>{children}</RNText>
+}
 
 Text.defaultProps = {
   size: 'medium',
@@ -31,6 +31,6 @@ Text.defaultProps = {
   weight: 'normal',
   children: '',
   customStyle: {},
-};
+}
 
-export default Text;
+export default Text

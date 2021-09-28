@@ -1,15 +1,18 @@
 import React from 'react'
-import { Text, TouchableOpacity, StyleProp, ViewStyle } from 'react-native'
+import { TouchableOpacity, StyleProp, ViewStyle } from 'react-native'
+
+import { Text } from '@marvel/components'
 
 import styles from './styles'
+import { colors } from '@marvel/styles'
 
 type ButtonProps = {
-  variant?: 'primary' | 'secondary';
-  title: string;
-  onPress?: () => void;
-  buttonStyle?: StyleProp<ViewStyle>;
-  disabled?: boolean;
-};
+  variant?: 'primary' | 'secondary'
+  title: string
+  onPress?: () => any
+  buttonStyle?: StyleProp<ViewStyle>
+  disabled?: boolean
+}
 
 const Button = ({ onPress = () => {}, title, disabled = false, buttonStyle }: ButtonProps) => {
   return (
@@ -17,7 +20,9 @@ const Button = ({ onPress = () => {}, title, disabled = false, buttonStyle }: Bu
       disabled={disabled}
       onPress={onPress}
       style={[styles.textContainer, buttonStyle, disabled && styles.disabled]}>
-      <Text style={styles.title}>{title}</Text>
+      <Text weight='bold' size='large' color={colors.black.primary}>
+        {title}
+      </Text>
     </TouchableOpacity>
   )
 }
