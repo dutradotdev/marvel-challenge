@@ -2,7 +2,7 @@ import * as React from 'react'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack'
 
-import { Home, CharacterDetail, FavoriteHeros } from '@marvel/screens'
+import { Home, CharacterDetail, FavoriteHeros } from '@marvel/modules'
 import { Button } from '@marvel/components'
 import { View, StyleSheet } from 'react-native'
 import { colors } from '@marvel/styles'
