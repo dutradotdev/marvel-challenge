@@ -4,4 +4,4 @@ export const sizes = {
     medium: 16,
     large: 18,
   },
-};
+}
