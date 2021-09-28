@@ -17,6 +17,7 @@
     "target": "esnext",
     "types": ["jest"],
     "module": "esnext",
+    "suppressImplicitAnyIndexErrors": true,
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
 }

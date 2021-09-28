@@ -19,17 +19,19 @@ module.exports = {
   },
   plugins: ['react', 'react-hooks', 'prettier'],
   rules: {
-    indent: ['error', 2, {SwitchCase: 1}],
+    indent: ['error', 2, { SwitchCase: 1 }],
     'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single', {avoidEscape: true}],
+    quotes: ['error', 'single', { avoidEscape: true }],
     'no-empty-function': 'off',
     'prettier/prettier': 'error',
     'react/display-name': 'off',
     'react/prop-types': 'off',
+    'no-undef': 'off',
+    'no-unused-vars': 'off',
   },
   settings: {
     react: {
       version: 'detect',
     },
   },
-};
+}
