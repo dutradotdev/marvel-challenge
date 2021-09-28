@@ -1,14 +1,11 @@
 import React from 'react'
-import {
-  SafeAreaView,
-  View,
-  ActivityIndicator,
-  TouchableOpacity,
-  FlatList,
-  Image,
-} from 'react-native'
+import { SafeAreaView, View, ActivityIndicator, TouchableOpacity, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import { useDispatch } from 'react-redux'
+//@ts-ignore
+import Image from 'react-native-image-progress'
+//@ts-ignore
+import ProgressBar from 'react-native-progress/Bar'
 
 import { Button, Error, Text, FavoriteButton } from '@marvel/components'
 import { useFavoriteHero, useGetPeopleWithPagination } from '@marvel/hooks'
@@ -62,6 +59,7 @@ const Home = () => {
             style={styles.logo}
             resizeMode='contain'
             source={{ uri: toHttps(`${item?.thumbnail?.path}.${item?.thumbnail?.extension}`) }}
+            indicator={ProgressBar}
           />
         </View>
         <View style={styles.descriptionContainer}>
