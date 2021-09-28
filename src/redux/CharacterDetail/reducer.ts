@@ -1,3 +1,4 @@
+import { HeroProps } from '@marvel/common'
 import { SELECTED_HERO } from '@marvel/redux/CharacterDetail'
 
 import { toHttps } from '@marvel/utils'
@@ -8,21 +9,21 @@ const initialState = {
     description: '',
     path: '',
     extension: '',
-    url: ''
+    url: '',
   },
 }
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: any) => {
   switch (action.type) {
     case SELECTED_HERO:
-      return { 
-        ...state, 
+      return {
+        ...state,
         selectedHero: {
           ...action.payload,
-          url: toHttps(`${action?.payload?.path}.${action?.payload?.extension}`)
-        }
-      };
+          url: toHttps(`${action?.payload?.path}.${action?.payload?.extension}`),
+        },
+      }
     default:
-      return state;
+      return state
   }
 }
