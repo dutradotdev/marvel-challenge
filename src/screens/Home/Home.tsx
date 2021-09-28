@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   SafeAreaView,
   View,
-  Text,
   ActivityIndicator,
   TouchableOpacity,
   FlatList,
@@ -11,8 +10,8 @@ import {
 import { useNavigation } from '@react-navigation/core'
 import { useDispatch } from 'react-redux'
 
-import { Button, Error } from '@marvel/components'
-import { useGetPeopleWithPagination } from '@marvel/hooks'
+import { Button, Error, Text, FavoriteButton } from '@marvel/components'
+import { useFavoriteHero, useGetPeopleWithPagination } from '@marvel/hooks'
 
 import { setSelectedHero } from '@marvel/redux/CharacterDetail'
 
@@ -20,21 +19,15 @@ import styles from './styles'
 import { toHttps } from '@marvel/utils'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '@marvel/router/router'
+import { colors } from '@marvel/styles'
+import { HeroItemProps, HeroProps } from '@marvel/common'
 
-type ItemProps = {
-  name?: string,
-  description?: string,
-  thumbnail?: {
-    path?: string,
-    extension?: string
-  }
-}
-
-type CharacterDetailScreenProp = StackNavigationProp<RootStackParamList, 'CharacterDetail'>;
+type CharacterDetailScreenProp = StackNavigationProp<RootStackParamList, 'CharacterDetail'>
 
 const Home = () => {
   const navigation = useNavigation<CharacterDetailScreenProp>()
   const dispatch = useDispatch()
+  const [handleFavoriteHeros, isFavoriteHero] = useFavoriteHero()
   const [
     { people: peopleData, loading: peopleLoading, error: peopleError },
     getPeople,
@@ -45,31 +38,46 @@ const Home = () => {
     currentPage,
   ] = useGetPeopleWithPagination()
 
-  const handleOnPress = (item: ItemProps) => {
-
-    const { name, description, thumbnail } = item
-    dispatch(setSelectedHero({
-      name,
-      description,
-      path: thumbnail?.path,
-      extension: thumbnail?.extension
-    }))
+  const handleCardOnPress = ({ id, name, description, thumbnail: { path, extension } }: any) => {
+    dispatch(
+      setSelectedHero({
+        id,
+        name,
+        description,
+        path,
+        extension,
+      })
+    )
     navigation.navigate('CharacterDetail')
   }
 
-  const ListItem = ({ item }: ItemProps) => {
+  const ListItem = ({ item }: HeroItemProps) => {
     return (
       <TouchableOpacity
-      key={item?.name}
-      onPress={() => handleOnPress(item)}
-      style={styles.cardContainer}>
-      <View style={styles.avatarContainer}>
-        <Image style={styles.logo} resizeMode='contain' source={{ uri: toHttps(`${item?.thumbnail?.path}.${item?.thumbnail?.extension}`)}} />
-      </View>
-      <View style={styles.descriptionContainer}>
-        {item?.name && <Text style={styles.title}>Name: {item?.name}</Text>}
-      </View>
-    </TouchableOpacity>
+        key={item?.name}
+        onPress={() => handleCardOnPress(item)}
+        style={styles.cardContainer}>
+        <View style={styles.avatarContainer}>
+          <Image
+            style={styles.logo}
+            resizeMode='contain'
+            source={{ uri: toHttps(`${item?.thumbnail?.path}.${item?.thumbnail?.extension}`) }}
+          />
+        </View>
+        <View style={styles.descriptionContainer}>
+          {item?.name && (
+            <Text weight='bold' size='large' color={colors.black.primary}>
+              Name: {item?.name}
+            </Text>
+          )}
+        </View>
+        <View style={styles.favoriteButton}>
+          <FavoriteButton
+            onPress={() => handleFavoriteHeros(item)}
+            isFavorite={Boolean(isFavoriteHero(item?.id))}
+          />
+        </View>
+      </TouchableOpacity>
     )
   }
 
@@ -81,19 +89,21 @@ const Home = () => {
             <Button
               disabled={!hasPreviousPage}
               onPress={previousPage}
-              title='Previous'
+              title='Anterior'
               buttonStyle={styles.buttonRight}
             />
-            <Button disabled={!hasNextPage} onPress={nextPage} title='Next' />
+            <Button disabled={!hasNextPage} onPress={nextPage} title='Próximo' />
           </View>
-          <Text style={[styles.title, styles.withMargin]}>Página: {Number(currentPage) + 1}</Text>
+          <Text customStyle={styles.withMargin} weight='bold'>
+            Página: {Number(currentPage) + 1}
+          </Text>
         </View>
       )}
     </>
   )
 
-  const renderItem = ({ item }) => <ListItem item={item} />
-  const keyExtractor = (item: ItemProps) => item?.name
+  const renderItem = ({ item }: HeroItemProps) => <ListItem item={item} />
+  const keyExtractor = ({ name }: { name: string }) => name
 
   const CharacterList = () => (
     <FlatList
@@ -103,19 +113,17 @@ const Home = () => {
       keyExtractor={keyExtractor}
       ListFooterComponent={PaginationButtons}
       renderItem={renderItem}
-      scrollEnabled
+      scrollEnabled={true}
     />
   )
 
   return (
     <SafeAreaView style={styles.container}>
-      {(peopleLoading) && (
-        <ActivityIndicator animating color='#AD7D37' size='large' />
+      {peopleLoading && (
+        <ActivityIndicator animating={true} color={colors.yellow.secondary} size='large' />
       )}
-      {(peopleError) && <Error refetch={getPeople} />}
-      {!peopleLoading && !peopleError && (
-        <CharacterList />
-      )}
+      {peopleError && <Error refetch={getPeople} />}
+      {!peopleLoading && !peopleError && <CharacterList />}
     </SafeAreaView>
   )
 }

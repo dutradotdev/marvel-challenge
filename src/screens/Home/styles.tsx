@@ -1,3 +1,4 @@
+import { colors, sizes } from '@marvel/styles'
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 40,
-    backgroundColor: '#A8C2C2',
+    backgroundColor: colors.blue.secondary,
     borderRadius: 10,
     marginBottom: 20,
     minWidth: 200,
@@ -32,19 +33,24 @@ const styles = StyleSheet.create({
     minHeight: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FBE91A',
+    backgroundColor: colors.yellow.primary,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
+  favoriteButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
   title: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: sizes.text.medium,
   },
   withMargin: {
     marginBottom: 10,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: sizes.text.small,
   },
   paginationContainer: {
     flex: 1,
