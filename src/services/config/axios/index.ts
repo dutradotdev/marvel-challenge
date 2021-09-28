@@ -1,20 +1,17 @@
 import axios from 'axios'
 import MD5 from 'crypto-js/md5'
-
-axios.defaults.baseURL = 'https://gateway.marvel.com:443/'
+import { API_URL, API_PUBLIC_KEY, API_PRIVATE_KEY } from 'react-native-dotenv'
 
 const axiosClient = axios.create({
-  baseURL: 'https://gateway.marvel.com:443/',
+  baseURL: API_URL,
 })
 
 axiosClient.interceptors.request.use((config) => {
   config.params = config.params || {}
   const ts = new Date().getTime()
-  const publicKey = '44f7f13a055446072f48b9eec4aab845'
-  const privateKey = '32ab53e9376588f56055cb021257d2e6adf5f811'
   config.params.ts = ts
-  config.params.apikey = publicKey
-  config.params.hash = MD5(ts + privateKey + publicKey).toString()
+  config.params.apikey = API_PUBLIC_KEY
+  config.params.hash = MD5(ts + API_PRIVATE_KEY + API_PUBLIC_KEY).toString()
   return config
 })
 
