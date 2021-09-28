@@ -1,7 +1,4 @@
-import useGetHomeWorlds from "./useGetHomeWorlds/useGetHomeWorlds";
-import useGetPeopleWithPagination from "./useGetPeopleWithPagination/useGetPeopleWithPagination";
+import useGetPeopleWithPagination from './useGetPeopleWithPagination/useGetPeopleWithPagination'
+import useFavoriteHero from './useFavoriteHero/useFavoriteHero'
 
-export {
-  useGetHomeWorlds,
-  useGetPeopleWithPagination
-}
+export { useGetPeopleWithPagination, useFavoriteHero }

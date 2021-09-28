@@ -1,8 +1,15 @@
 import { useEffect, useState } from 'react'
 import { getCharacter } from '@marvel/services'
-import orderByField from '@marvel/utils'
 
-const useGetPeopleWithPagination = () => {
+const useGetPeopleWithPagination = (): [
+  any,
+  () => any,
+  () => any,
+  () => any,
+  boolean,
+  boolean,
+  number
+] => {
   const [people, setPeople] = useState([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState(false)
@@ -18,10 +25,9 @@ const useGetPeopleWithPagination = () => {
     try {
       setLoading(true)
 
-      const { data: {
-        data
-      } } = await getCharacter(currentPage)
-      console.tron.log(data)
+      const {
+        data: { data },
+      } = await getCharacter(currentPage)
       setHasNextPage(data?.total - data?.offset > 0)
       setHasPreviousPage(data?.offset > 0)
 
@@ -34,14 +40,14 @@ const useGetPeopleWithPagination = () => {
     }
   }
 
-  const nextPage = () => {
+  const nextPage = (): void => {
     if (!hasNextPage) {
       return
     }
     setCurrentPage((currentPage) => currentPage + 1)
   }
 
-  const previousPage = () => {
+  const previousPage = (): void => {
     if (!hasPreviousPage) {
       return
     }
