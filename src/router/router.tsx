@@ -26,6 +26,7 @@ function Router() {
             headerStyle: {
               backgroundColor: colors.blue.secondary,
             },
+            headerTitleAlign: 'center',
             headerRight: () => (
               <View style={styles.container}>
                 <Button
