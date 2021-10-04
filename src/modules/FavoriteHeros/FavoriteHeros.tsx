@@ -62,18 +62,22 @@ const FavoriteHeros = () => {
             showsVerticalScrollIndicator={false}
             keyExtractor={keyExtractor}
             renderItem={renderItem}
-            scrollEnabled={true}
+            scrollEnabled
             ListEmptyComponent={() => (
               <Text size='large' weight='bold'>
-                {'Não há resultados que atendam os critérios da busca'}
+                {searchedHero.length === 0
+                  ? 'Você ainda não favoritou nenhum herói!'
+                  : 'Não há resultados que atendam os critérios da busca.'}
               </Text>
             )}
           />
-          <Button
-            title='Compartilhe a sua lista de heróis!'
-            buttonStyle={{ width: '100%' }}
-            onPress={handleOnPress}
-          />
+          {favoriteHerosAsArray.length > 0 && (
+            <Button
+              title='Compartilhe a sua lista de heróis!'
+              buttonStyle={styles.buttonShare}
+              onPress={handleOnPress}
+            />
+          )}
         </View>
       </SafeAreaView>
     </>
